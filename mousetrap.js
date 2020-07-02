@@ -16,8 +16,10 @@
  *
  * Mousetrap is a simple keyboard shortcut library for Javascript with
  * no external dependencies
+ * 
+ * Modified by Alex Semenets, changed the amount of time (ms) to wait before resetting the keyboard sequence
  *
- * @version 1.6.5
+ * @version 1.6.6
  * @url craig.is/killing/mice
  */
 (function(window, document, undefined) {
@@ -478,6 +480,13 @@
         var _resetTimer;
 
         /**
+         * amount of time (ms) to wait before resetting the sequence
+         * 
+         * @type {number}
+         */
+        self.resetSequenceTimeout = 3000;
+
+        /**
          * temporary state where we will ignore the next keyup
          *
          * @type {boolean|string}
@@ -747,7 +756,7 @@
          */
         function _resetSequenceTimer() {
             clearTimeout(_resetTimer);
-            _resetTimer = setTimeout(_resetSequences, 1000);
+            _resetTimer = setTimeout(_resetSequences,  self.resetSequenceTimeout);
         }
 
         /**
